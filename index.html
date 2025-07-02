@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Bienvenue je m'apelle MENDRIKA</h1>
+        <img src="" >
+        <button id="settingsBtn" title="Paramètres">⚙️</button>
+    </header>
+
+    <div id="settingsPanel" class="hidden">
+        <h2>Choisir un thème</h2>
+        <button class="theme-btn" data-theme="light">Clair</button>
+        <button class="theme-btn" data-theme="dark">Sombre</button>
+        <button class="theme-btn" data-theme="colorful">Coloré</button>
+        <button id="closeSettings">Fermer</button>
+        <h2>Disposition des projets</h2>
+        <button class="layout-btn" data-layout="row">Aligné à droite</button>
+        <button class="layout-btn" data-layout="column">Verticale</button>
+        <button class="layout-btn" data-layout="pyramid">Pyramide</button>
+        <button class="layout-btn" data-layout="grid">Grille</button>
+        <button class="layout-btn" data-layout="carousel">Carrousel</button>
+    </div>
+
+ 
+    <section id="cv-infos">
+        <h2>Profil</h2>
+        <p>Développeur web passionné, créatif et rigoureux, spécialisé dans la création d’expériences numériques modernes et accessibles.</p>
+        <h2>Expérience</h2>
+        <ul>
+            <li>Développeur Web chez TechCorp (2023-2025)</li>
+            <li>Stagiaire Dev Frontend chez WebStart (2022)</li>
+        </ul>
+        <h2>Formation</h2>
+        <ul>
+            <li>Licence Informatique - Université XYZ</li>
+        </ul>
+        <h2>Compétences</h2>
+        <ul>
+            <li>HTML, CSS, JavaScript, React</li>
+            <li>Node.js, Express, MongoDB</li>
+            <li>UI/UX Design</li>
+        </ul>
+        <h2>Langues</h2>
+        <ul>
+            <li>Français (natif)</li>
+            <li>Anglais (courant)</li>
+        </ul>
+        <h2>Centres d’intérêt</h2>
+        <ul>
+            <li>Veille technologique, jeux vidéo, sport, musique</li>
+        </ul>
+        <h2>Contact</h2>
+        <ul>
+            <li>Email : fahasoavanamendrikajonah@gmail.com</li>
+            <li>Téléphone : 06 12 34 56 78</li>
+        </ul>
+    </section>
+
+       <div id="mesDifferentProjet" class="row">
+        <div class="projet">
+            <h3>Portfolio Web</h3>
+            <p>Site personnel moderne pour présenter mes réalisations et compétences en développement web.</p>
+        </div>
+        <div class="projet">
+            <h3>Application Mobile</h3>
+            <p>Application Android pour la gestion de tâches quotidiennes, avec notifications et synchronisation cloud.</p>
+        </div>
+        <div class="projet">
+            <h3>API REST</h3>
+            <p>API sécurisée pour une plateforme e-commerce, documentation Swagger et tests automatisés.</p>
+        </div>
+        <div class="projet">
+            <h3>Jeu 2D</h3>
+            <p>Petit jeu éducatif développé en JavaScript pour apprendre les mathématiques en s’amusant.</p>
+        </div>
+        <div class="projet">
+            <h3>Blog Technique</h3>
+            <p>Blog sur les technologies web, astuces de développement et veille technologique.</p>
+        </div>
+        <div class="projet">
+            <h3>Dashboard</h3>
+            <p>Tableau de bord interactif pour visualiser des données en temps réel avec graphiques dynamiques.</p>
+        </div>
+        <div class="projet">
+            <h3>CV en ligne</h3>
+            <p>CV interactif et personnalisable en ligne, avec choix de thèmes et animations.</p>
+        </div>
+        <div class="projet">
+            <h3>Bot Discord</h3>
+            <p>Bot pour automatiser des tâches et modérer un serveur Discord communautaire.</p>
+        </div>
+    </div>
+
+    <section id="contact-section">
+        <h2>Me contacter</h2>
+        <form id="contactForm">
+            <label for="contactName">Nom :</label>
+            <input type="text" id="contactName" name="contactName" required>
+            
+            <label for="contactEmail">Email :</label>
+            <input type="email" id="contactEmail" name="contactEmail" required>
+            
+            <label for="contactMessage">Message :</label>
+            <textarea id="contactMessage" name="contactMessage" rows="4" required></textarea>
+            
+            <button type="submit">Envoyer</button>
+        </form>
+        <div id="contactSuccess" style="display:none;color:var(--vert-clair);margin-top:1rem;">
+            Merci pour votre message !
+        </div>
+    </section>
+
+    <section id="comment-section">
+        <h2>Laisser un commentaire</h2>
+        <form id="commentForm">
+            <label for="commentName">Nom :</label>
+            <input type="text" id="commentName" name="commentName" required>
+            
+            <label for="commentText">Commentaire :</label>
+            <textarea id="commentText" name="commentText" rows="3" required></textarea>
+            
+            <label for="commentStars">Votre avis :</label>
+            <div id="starRating" class="star-rating">
+                <span data-star="1">&#9733;</span>
+                <span data-star="2">&#9733;</span>
+                <span data-star="3">&#9733;</span>
+                <span data-star="4">&#9733;</span>
+                <span data-star="5">&#9733;</span>
+            </div>
+            <input type="hidden" id="commentStars" name="commentStars" value="5" required>
+            
+            <button type="submit">Poster</button>
+        </form>
+        <div id="commentsList" style="margin-top:1rem;"></div>
+        <div id="contactedList" class="contacted-list"></div>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html>
