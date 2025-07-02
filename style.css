@@ -273,7 +273,7 @@ body {
     box-shadow: 0 2px 8px rgba(0,0,0,0.10);
 }
 body.theme-dark .comment-item,
-body.theme-colorful .comment-item {
+body.theme-dark .comment-item {
     background: #fff;
     color: #222;
     border-left: 4px solid var(--bleu-clair);
@@ -316,7 +316,7 @@ body.theme-colorful .comment-item {
     box-shadow: 0 1px 4px rgba(0,0,0,0.05);
 }
 body.theme-dark .contacted-list,
-body.theme-colorful .contacted-list {
+body.theme-dark .contacted-list {
     background: #222;
     color: var(--bleu-clair);
 }
@@ -394,5 +394,125 @@ body.theme-colorful .contacted-list {
         height: 80px;
     }
     #settingsPanel { right: 0.5rem; left: 0.5rem; }
+}
+
+/* Ajoute ce bloc à la fin de ton fichier CSS pour un vrai thème sombre */
+
+body.theme-dark {
+    background: #181c22;
+    color: #f4f8fb;
+}
+
+body.theme-dark .cv-header {
+    background: linear-gradient(120deg, #23272f 60%, #2b3a4b 100%);
+    box-shadow: 0 6px 32px rgba(0,0,0,0.18);
+}
+body.theme-dark .profile-pic-container {
+    background: #23272f;
+}
+body.theme-dark .header-content h1,
+body.theme-dark .header-content h2,
+body.theme-dark .header-content p {
+    color: #fff;
+    text-shadow: none;
+}
+body.theme-dark #settingsBtn {
+    background: #23272f;
+    color: var(--bleu-clair);
+}
+body.theme-dark #settingsBtn:hover {
+    background: var(--bleu-clair);
+    color: #23272f;
+}
+
+body.theme-dark #settingsPanel {
+    background: #23272f;
+    color: #fff;
+}
+body.theme-dark .theme-btn,
+body.theme-dark .layout-btn,
+body.theme-dark #closeSettings {
+    background: #2b3a4b;
+    color: #fff;
+}
+body.theme-dark .theme-btn:hover,
+body.theme-dark .layout-btn:hover,
+body.theme-dark #closeSettings:hover {
+    background: var(--vert-clair);
+    color: #23272f;
+}
+
+body.theme-dark .cv-section,
+body.theme-dark #contact-section,
+body.theme-dark #comment-section {
+    background: #23272f;
+    color: #f4f8fb;
+    box-shadow: 0 6px 32px rgba(0,0,0,0.18);
+}
+body.theme-dark .cv-section h2,
+body.theme-dark #contact-section h2,
+body.theme-dark #comment-section h2 {
+    color: var(--bleu-clair);
+}
+body.theme-dark #cv-infos li {
+    color: #e0e0e0;
+}
+body.theme-dark .projet {
+    background: linear-gradient(120deg, #23272f 80%, #2b3a4b 100%);
+    border-left: 6px solid var(--bleu-clair);
+}
+body.theme-dark .projet h3 {
+    color: var(--bleu-clair);
+}
+body.theme-dark .projet:hover {
+    border-left: 6px solid var(--vert-clair);
+}
+body.theme-dark #contactForm input,
+body.theme-dark #contactForm textarea,
+body.theme-dark #commentForm input,
+body.theme-dark #commentForm textarea {
+    background: #23272f;
+    color: #fff;
+    border: 1px solid #444;
+}
+body.theme-dark #contactForm input:focus,
+body.theme-dark #contactForm textarea:focus,
+body.theme-dark #commentForm input:focus,
+body.theme-dark #commentForm textarea:focus {
+    border: 1.5px solid var(--bleu-clair);
+}
+body.theme-dark .comment-item {
+    background: #181c22;
+    color: #fff;
+    border-left: 4px solid var(--bleu-clair);
+}
+body.theme-dark .comment-item strong {
+    color: var(--bleu-clair);
+}
+body.theme-dark .comment-stars {
+    color: var(--jaune-clair);
+}
+body.theme-dark .star-rating span {
+    color: #555;
+}
+body.theme-dark .star-rating .active,
+body.theme-dark .star-rating span:hover,
+body.theme-dark .star-rating span:hover ~ span {
+    color: var(--jaune-clair);
+}
+body.theme-dark .contacted-list {
+    background: #23272f;
+    color: var(--bleu-clair);
+}
+body.theme-dark .cv-footer {
+    background: none;
+}
+body.theme-dark .social-btn {
+    background: #23272f;
+    color: var(--bleu-clair);
+}
+body.theme-dark .social-btn:hover {
+    background: var(--bleu-clair);
+    color: #23272f;
 }
 
