@@ -17,34 +17,32 @@ const savedTheme = localStorage.getItem('cv-theme');
 if(savedTheme) document.body.classList.add('theme-' + savedTheme);
 else document.body.classList.add('theme-light');
 
+// Liste complète des classes de disposition
+const layoutClasses = ['row', 'column', 'pyramid', 'grid', 'carousel'];
+
 // Gestion de la disposition des projets
 const mesProjets = document.getElementById('mesDifferentProjet');
 document.querySelectorAll('.layout-btn').forEach(btn => {
     btn.onclick = function() {
-        mesProjets.classList.remove('row', 'column', 'pyramid');
+        // Retire toutes les classes de disposition
+        layoutClasses.forEach(cls => mesProjets.classList.remove(cls));
+        // Ajoute la nouvelle classe
+        mesProjets.classList.add(btn.dataset.layout);
+
+        // Affiche selon le layout
         if (btn.dataset.layout === 'pyramid') {
-            mesProjets.classList.add('pyramid');
             renderPyramid();
-        } else if (btn.dataset.layout === 'grid') {
-            mesProjets.classList.add('grid');
-            renderRowColumn();
-        } else if (btn.dataset.layout === 'carousel') {
-            mesProjets.classList.add('carousel');
-            renderRowColumn();
         } else {
-            mesProjets.classList.add(btn.dataset.layout);
             renderRowColumn();
         }
         localStorage.setItem('cv-layout', btn.dataset.layout);
     };
 });
 
-// Fonction pour affichage row/column
+// Fonction pour affichage row/column/grid/carousel
 function renderRowColumn() {
-    // Récupère tous les projets
-    const projets = Array.from(mesProjets.querySelectorAll('.projet'));
-    mesProjets.innerHTML = '';
-    projets.forEach(p => mesProjets.appendChild(p));
+    // Ne vide pas le HTML, laisse les projets en place
+    // (optionnel : tu peux réordonner ici si besoin)
 }
 
 // Fonction pour affichage pyramide
@@ -139,36 +137,72 @@ document.querySelectorAll('.theme-btn').forEach(btn => {
 // Si le thème coloré est actif au chargement
 if (document.body.classList.contains('theme-colorful')) startColorfulAnimation();
 
-// Gestion des étoiles
+// Apparition animée des sections au scroll (adapte au style .cv-section.visible)
+document.querySelectorAll('.cv-section').forEach(section => {
+    section.classList.remove('visible');
+});
+function revealSectionsOnScroll() {
+    document.querySelectorAll('.cv-section').forEach(section => {
+        const rect = section.getBoundingClientRect();
+        if (rect.top < window.innerHeight - 80) {
+            section.classList.add('visible');
+        }
+    });
+}
+window.addEventListener('scroll', revealSectionsOnScroll);
+window.addEventListener('DOMContentLoaded', revealSectionsOnScroll);
+
+// Validation simple du formulaire de contact (adapte au style #contactSuccess)
+const contactForm = document.getElementById('contactForm');
+const contactSuccess = document.getElementById('contactSuccess');
+if(contactForm) {
+    contactForm.onsubmit = function(e) {
+        e.preventDefault();
+        let valid = true;
+        contactForm.querySelectorAll('input[required], textarea[required]').forEach(input => {
+            if(!input.value.trim()) valid = false;
+        });
+        if(valid) {
+            contactSuccess.style.display = 'block';
+            setTimeout(() => { contactSuccess.style.display = 'none'; }, 4000);
+            contactForm.reset();
+        }
+    };
+}
+
+// Gestion des étoiles pour les commentaires (adapte au style .star-rating .active)
 const starRating = document.getElementById('starRating');
 const starInput = document.getElementById('commentStars');
 let currentStars = 5;
-starRating.querySelectorAll('span').forEach(star => {
-    star.addEventListener('mouseenter', function() {
-        highlightStars(this.dataset.star);
-    });
-    star.addEventListener('mouseleave', function() {
-        highlightStars(currentStars);
-    });
-    star.addEventListener('click', function() {
-        currentStars = this.dataset.star;
-        starInput.value = currentStars;
-        highlightStars(currentStars);
-    });
-});
-function highlightStars(count) {
+if(starRating && starInput) {
     starRating.querySelectorAll('span').forEach(star => {
-        star.classList.toggle('active', star.dataset.star <= count);
+        star.addEventListener('mouseenter', function() {
+            highlightStars(this.dataset.star);
+        });
+        star.addEventListener('mouseleave', function() {
+            highlightStars(currentStars);
+        });
+        star.addEventListener('click', function() {
+            currentStars = this.dataset.star;
+            starInput.value = currentStars;
+            highlightStars(currentStars);
+        });
     });
+    function highlightStars(count) {
+        starRating.querySelectorAll('span').forEach(star => {
+            star.classList.toggle('active', star.dataset.star <= count);
+        });
+    }
+    highlightStars(currentStars);
 }
-highlightStars(currentStars);
 
-// Gestion des commentaires (stockés en localStorage)
+// Gestion des commentaires (stockés en localStorage, adapte au style .comment-item et .contacted-list)
 const commentForm = document.getElementById('commentForm');
 const commentsList = document.getElementById('commentsList');
 const contactedList = document.getElementById('contactedList');
 
 function renderComments() {
+    if(!commentsList || !contactedList) return;
     const comments = JSON.parse(localStorage.getItem('cv-comments') || '[]');
     commentsList.innerHTML = '';
     comments.forEach(c => {
@@ -189,21 +223,24 @@ function renderComments() {
         : '';
 }
 
-commentForm.onsubmit = function(e) {
-    e.preventDefault();
-    const name = document.getElementById('commentName').value.trim();
-    const text = document.getElementById('commentText').value.trim();
-    const stars = parseInt(document.getElementById('commentStars').value, 10) || 5;
-    if(name && text) {
-        const comments = JSON.parse(localStorage.getItem('cv-comments') || '[]');
-        comments.unshift({name, text, stars});
-        localStorage.setItem('cv-comments', JSON.stringify(comments));
-        renderComments();
-        commentForm.reset();
-        currentStars = 5;
-        highlightStars(currentStars);
-        starInput.value = 5;
-    }
-};
+if(commentForm) {
+    commentForm.onsubmit = function(e) {
+        e.preventDefault();
+        const name = document.getElementById('commentName').value.trim();
+        const text = document.getElementById('commentText').value.trim();
+        const stars = parseInt(document.getElementById('commentStars').value, 10) || 5;
+        if(name && text) {
+            const comments = JSON.parse(localStorage.getItem('cv-comments') || '[]');
+            comments.unshift({name, text, stars});
+            localStorage.setItem('cv-comments', JSON.stringify(comments));
+            renderComments();
+            commentForm.reset();
+            currentStars = 5;
+            if(typeof highlightStars === "function") highlightStars(currentStars);
+            starInput.value = 5;
+        }
+    };
+    renderComments();
+}
 
-renderComments();
+// Les autres scripts (thèmes, disposition, etc.) restent inchangés
